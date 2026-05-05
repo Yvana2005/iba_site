@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --background: #ffffff;
@@ -18,9 +20,58 @@
     --foreground: #ededed;
   }
 }
+@layer components {
+  .container-custom {
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* Effet de flou progressif */
+.backdrop-blur-sm {
+  backdrop-filter: blur(4px);
+}
+
+/* Animation d'entrée pour les cartes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.grid.md\\:grid-cols-3 > div {
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.grid.md\\:grid-cols-3 > div:nth-child(1) { animation-delay: 0.1s; }
+.grid.md\\:grid-cols-3 > div:nth-child(2) { animation-delay: 0.2s; }
+.grid.md\\:grid-cols-3 > div:nth-child(3) { animation-delay: 0.3s; }

@@ -1,0 +1,48 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+ provider = "mysql"
+ url      = env("DATABASE_URL")
+}
+
+// Ce modèle représente un article de blog
+model Article {
+  id        Int     @id @default(autoincrement())
+  title     String  // Titre de l'article
+  slug      String  @unique // Lien unique, ex: "mon-premier-article"
+  excerpt   String? // Un court résumé (optionnel avec le ?)
+  content   String  @db.Text // Le contenu complet en Markdown ou HTML
+  imageUrl  String? // L'URL de l'image à la une
+  author    String  // Nom de l'auteur
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  status    String  @default("published") // "draft" ou "published"
+
+  // La relation : un article peut avoir plusieurs commentaires
+  commentaires Commentaire[]
+
+  @@map("articles") // Nom de la table dans MySQL
+}
+
+// Ce modèle représente un commentaire laissé par un visiteur
+model Commentaire {
+  id        Int      @id @default(autoincrement())
+  author    String   // Nom du commentateur
+  email     String   // Son email (pour la modération)
+  content   String   @db.Text // Le texte du commentaire
+  status    String   @default("pending") // "pending", "approved", "spam"
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // La clé étrangère qui lie le commentaire à un article
+  articleId Int
+  article   Article  @relation(fields: [articleId], references: [id])
+
+  @@map("commentaires")
+}
