@@ -46,3 +46,17 @@ model Commentaire {
 
   @@map("commentaires")
 }
+
+model AdminUser {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String   // Hashé avec bcrypt
+  role      String   @default("editor") // "admin" ou "editor"
+  avatar    String?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  isActive  Boolean  @default(true)
+
+  @@map("admin_users")
+}
