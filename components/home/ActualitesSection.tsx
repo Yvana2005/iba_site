@@ -18,11 +18,11 @@ export default async function ActualitesSection() {
     <section className="py-20 bg-white">
       <div className="container-custom">
         <div className="flex justify-between items-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold font-playfair">
+          <h2 className="text-3xl md:text-4xl font-bold font-playfair text-gray-800">
             ANALYSE ET ACTUALITÉS
           </h2>
           <Button variant="link">
-            VIEW TOLL FREE ATTIRE
+            VOIR TOUT LES ARTICLES
             <ArrowRight className="ml-2 w-4 h-4" />
           </Button>
         </div>

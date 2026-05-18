@@ -8,7 +8,7 @@ import { Eye, EyeOff, LogIn, AlertCircle, CheckCircle } from 'lucide-react'
 
 export default function LoginPage() {
   const router = useRouter()
-  const { data: session, status } = useSession()
+  //const { data: session, status } = useSession()
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
