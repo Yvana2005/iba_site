@@ -15,7 +15,7 @@ export default function MissionSection() {
           {/* Colonne gauche - Description */}
           <div>
             <p className="text-gray-700 leading-relaxed mb-6">
-              ISABEAUTY s'engage à être le partenaire de confiance dans la distribution et la promotion 
+              IBABEAUTY s'engage à être le partenaire de confiance dans la distribution et la promotion 
               de produits parapharmaceutiques et cosmétiques de haute qualité.
             </p>
             <p className="text-gray-700 leading-relaxed mb-6">

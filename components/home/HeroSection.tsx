@@ -6,7 +6,7 @@ export default function HeroSection() {
     <section className="relative overflow-hidden text-white py-16 md:py-24 lg:py-32">
       <div className="absolute inset-0 z-0">
           <Image
-            src="/Images/background2.jpg"
+            src="/Images/background3.jpg"
             alt="Communauté unie"
             fill
             className="object-cover  brightness-90"

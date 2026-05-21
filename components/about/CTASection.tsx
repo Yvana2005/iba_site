@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { Users, Mail, ArrowRight } from 'lucide-react'
+import Link from 'next/link'
 
 export default function CTASection() {
   return (
@@ -20,16 +21,21 @@ export default function CTASection() {
               className="group"
             >
               <Users className="mr-2 w-5 h-5" />
-              Rencontrez les experts
+              <Link href="/team-partners" className="flex items-center">
+                Rencontrez les experts
+              </Link>
               <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Button>
+            
             <Button 
               variant="primary" 
               size="lg"
               className="group bg-white text-black hover:bg-gray-100"
             >
               <Mail className="mr-2 w-5 h-5" />
-              Entrer en Contact
+              <Link href="/contact" className="flex items-center">
+                Entrer en Contact
+              </Link>
               <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Button>
           </div>

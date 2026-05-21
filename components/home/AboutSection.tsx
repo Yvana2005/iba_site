@@ -22,10 +22,13 @@ export default function AboutSection() {
                 Nous sommes convaincus que le marketing des produits de beauté doit être aussi raffiné que les produits eux-mêmes. Grâce à un positionnement stratégique, une mise en œuvre experte et une attention constante aux détails, nous aidons les marques à assurer une croissance durable sur des marchés concurrentiels.
               </p>
             </div>
-            <Button variant="outline" className="mt-6 group">
-              LIRE PLUS
-              
-            </Button>
+            <a 
+            href="/blog" 
+            className="inline-flex items-center gap-2 bg-gray-900 text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors group mt-5"
+          >
+            Lire plus
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </a>
           </div>
           <div className="relative">
             <div className="bg-gray-200 rounded-lg h-96 w-full">
