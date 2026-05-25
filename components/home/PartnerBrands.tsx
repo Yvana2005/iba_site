@@ -7,9 +7,9 @@ import Image from 'next/image'
 
 const partners = [
   { 
-    name: 'Pfizer', 
-    logo: '/partners/pfizer.png',
-    description: 'Leader mondial pharmaceutique',
+    name: 'L\'OREAL', 
+    logo: '/partners/Loreal-logo.png',
+    description: 'Leader mondial de la beauté: cosmétiques',
   },
   { 
     name: 'Neutrogena', 
@@ -17,8 +17,8 @@ const partners = [
     description: 'Solutions innovantes en santé',
   },
   { 
-    name: 'Johnson & Johnson', 
-    logo: '/partners/jnj.png',
+    name: 'CERAVE', 
+    logo: '/partners/CeraVe-Logo.jpg',
     description: 'Soins de santé haut de gamme',
   },
   { 
@@ -27,13 +27,13 @@ const partners = [
     description: 'Médicaments de spécialité',
   },
   { 
-    name: 'Roche', 
-    logo: '/partners/roche.png',
+    name: 'La Roche Posay', 
+    logo: '/partners/larocheposay.png',
     description: 'Biotechnologie avancée',
   },
   { 
-    name: 'GSK', 
-    logo: '/partners/gsk.png',
+    name: 'OGX', 
+    logo: '/partners/ogx.jpg',
     description: 'Vaccins et médicaments',
   },
 ]
