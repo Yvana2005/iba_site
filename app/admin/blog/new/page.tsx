@@ -3,20 +3,16 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import { 
   Save, 
-  Eye, 
-  Trash2, 
   Plus, 
-  Image as ImageIcon,
-  FileText,
   LayoutDashboard,
   BookOpen,
   MessageCircle,
   Settings,
   ExternalLink,
   LogOut,
-  ChevronDown,
   AlertCircle
 } from 'lucide-react'
 
@@ -109,7 +105,7 @@ export default function NouvelArticlePage() {
 
       if (!response.ok) throw new Error('Erreur lors de la création de l\'article')
 
-      const article = await response.json()
+      await response.json()
       router.push('/admin/blog')
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Une erreur est survenue')
@@ -138,7 +134,7 @@ export default function NouvelArticlePage() {
                 <BookOpen className="w-5 h-5" />
                 <span>Tous les Posts</span>
               </Link>
-              <Link href="/admin/blog/nouveau" className="flex items-center gap-3 px-4 py-2 bg-black text-white rounded-lg">
+              <Link href="/admin/blog/new" className="flex items-center gap-3 px-4 py-2 bg-black text-white rounded-lg">
                 <Plus className="w-5 h-5" />
                 <span>Créer un nouveau</span>
               </Link>
@@ -202,7 +198,7 @@ export default function NouvelArticlePage() {
                           value={formData.title}
                           onChange={handleInputChange}
                           placeholder="Un titre accrocheur pour votre article"
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent text-gray-600"
                           required
                         />
                       </div>
@@ -219,7 +215,7 @@ export default function NouvelArticlePage() {
                         name="slug"
                         value={formData.slug}
                         onChange={handleInputChange}
-                        className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent bg-gray-50"
+                        className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent bg-gray-50 "
                       />
                     </div>
                     <p className="text-xs text-gray-500 mt-1">Généré automatiquement à partir du titre</p>
@@ -237,7 +233,7 @@ export default function NouvelArticlePage() {
                         value={formData.author}
                         onChange={handleInputChange}
                         placeholder="Votre nom"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent text-gray-600"
                         required
                       />
                     </div>
@@ -250,7 +246,7 @@ export default function NouvelArticlePage() {
                         name="category"
                         value={formData.category}
                         onChange={handleInputChange}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent text-gray-600"
                       >
                         <option value="">Sélectionner une catégorie</option>
                         <option value="Distribution">Distribution</option>
@@ -272,9 +268,9 @@ export default function NouvelArticlePage() {
                         type="text"
                         value={tagInput}
                         onChange={(e) => setTagInput(e.target.value)}
-                        onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddTag())}
+                        onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddTag())}
                         placeholder="Ajouter un tag (ex: Innovation, Santé)"
-                        className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
+                        className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent text-gray-600"
                       />
                       <button
                         type="button"
@@ -314,7 +310,7 @@ export default function NouvelArticlePage() {
                       onChange={handleInputChange}
                       rows={3}
                       placeholder="Un bref résumé de votre article qui apparaîtra dans la liste des articles..."
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent text-gray-600"
                     />
                   </div>
 
@@ -329,11 +325,11 @@ export default function NouvelArticlePage() {
                       value={formData.imageUrl}
                       onChange={handleInputChange}
                       placeholder="https://example.com/image.jpg"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent text-gray-600"
                     />
                     {formData.imageUrl && (
-                      <div className="mt-2">
-                        <img src={formData.imageUrl} alt="Preview" className="h-32 w-auto rounded-lg object-cover" />
+                      <div className="mt-2 relative h-32 w-auto">
+                        <Image src={formData.imageUrl} alt="Preview" width={200} height={128} className="rounded-lg object-cover" style={{ width: 'auto', height: '100%' }} unoptimized />
                       </div>
                     )}
                   </div>
@@ -349,7 +345,7 @@ export default function NouvelArticlePage() {
                       onChange={handleInputChange}
                       rows={12}
                       placeholder="Écrivez votre article ici... (Support Markdown et HTML)"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent font-mono text-sm"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent font-mono text-sm text-gray-600"
                       required
                     />
                     <p className="text-xs text-gray-500 mt-1">
@@ -370,9 +366,9 @@ export default function NouvelArticlePage() {
                           value="draft"
                           checked={formData.status === 'draft'}
                           onChange={handleInputChange}
-                          className="w-4 h-4"
+                          className="w-4 h-4 "
                         />
-                        <span>Brouillon</span>
+                        <span className='text-gray-700'>Brouillon</span>
                       </label>
                       <label className="flex items-center gap-2">
                         <input
@@ -383,7 +379,7 @@ export default function NouvelArticlePage() {
                           onChange={handleInputChange}
                           className="w-4 h-4"
                         />
-                        <span>Publier</span>
+                        <span className='text-gray-700'>Publier</span>
                       </label>
                     </div>
                   </div>
@@ -392,7 +388,7 @@ export default function NouvelArticlePage() {
 
               {/* SEO Section (optionnel mais recommandé) */}
               <div className="bg-white rounded-lg shadow-sm p-6">
-                <h3 className="text-lg font-semibold mb-4">Optimisation SEO</h3>
+                <h3 className="text-lg font-semibold mb-4 text-gray-700">Optimisation SEO</h3>
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -404,7 +400,7 @@ export default function NouvelArticlePage() {
                       value={formData.seoTitle}
                       onChange={handleInputChange}
                       placeholder="Titre pour les moteurs de recherche (laissez vide pour utiliser le titre principal)"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent text-gray-600"
                     />
                   </div>
                   <div>
@@ -417,7 +413,7 @@ export default function NouvelArticlePage() {
                       onChange={handleInputChange}
                       rows={2}
                       placeholder="Description pour les moteurs de recherche (150-160 caractères)"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent text-gray-600"
                     />
                     <p className="text-xs text-gray-500 mt-1">
                       {formData.seoDescription?.length || 0}/160 caractères
@@ -447,7 +443,7 @@ export default function NouvelArticlePage() {
                   ) : (
                     <>
                       <Save className="w-4 h-4" />
-                      Publier l'article
+                      {formData.status === 'draft' ? 'Enregistrer le brouillon' : 'Publier l\'article'}
                     </>
                   )}
                 </button>

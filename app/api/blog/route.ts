@@ -1,20 +1,17 @@
-
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    
-    // Validation des données
+
     if (!body.title || !body.content || !body.author) {
       return NextResponse.json(
         { error: 'Les champs titre, contenu et auteur sont requis' },
         { status: 400 }
       )
     }
-    
-    // Création de l'article
+
     const article = await prisma.article.create({
       data: {
         title: body.title,
@@ -24,16 +21,44 @@ export async function POST(request: Request) {
         imageUrl: body.imageUrl || '',
         author: body.author,
         status: body.status || 'draft',
-        // Les tags et la catégorie peuvent être stockés dans un champ JSON ou une table séparée
-        // Pour simplifier, on les ignore pour l'instant mais on peut les ajouter plus tard
+        category: body.category || null,
+        tags: body.tags && body.tags.length > 0 ? body.tags : null,
+        seoTitle: body.seoTitle || null,
+        seoDescription: body.seoDescription || null,
       }
     })
-    
+
     return NextResponse.json(article, { status: 201 })
   } catch (error) {
     console.error('Error creating article:', error)
     return NextResponse.json(
       { error: 'Erreur lors de la création de l\'article' },
+      { status: 500 }
+    )
+  }
+}
+
+export async function GET() {
+  try {
+    const articles = await prisma.article.findMany({
+      orderBy: { createdAt: 'desc' },
+      select: {
+        id: true,
+        title: true,
+        slug: true,
+        excerpt: true,
+        imageUrl: true,
+        author: true,
+        status: true,
+        category: true,
+        createdAt: true,
+      }
+    })
+    return NextResponse.json(articles)
+  } catch (error) {
+    console.error('Error fetching articles:', error)
+    return NextResponse.json(
+      { error: 'Erreur lors de la récupération des articles' },
       { status: 500 }
     )
   }

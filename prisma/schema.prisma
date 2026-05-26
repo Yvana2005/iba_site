@@ -12,23 +12,25 @@ datasource db {
  url      = env("DATABASE_URL")
 }
 
-// Ce modèle représente un article de blog
 model Article {
-  id        Int     @id @default(autoincrement())
-  title     String  // Titre de l'article
-  slug      String  @unique // Lien unique, ex: "mon-premier-article"
-  excerpt   String? // Un court résumé (optionnel avec le ?)
-  content   String  @db.Text // Le contenu complet en Markdown ou HTML
-  imageUrl  String? // L'URL de l'image à la une
-  author    String  // Nom de l'auteur
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-  status    String  @default("published") // "draft" ou "published"
+  id             Int      @id @default(autoincrement())
+  title          String
+  slug           String   @unique
+  excerpt        String?
+  content        String   @db.Text
+  imageUrl       String?
+  author         String
+  category       String?
+  tags           Json?
+  seoTitle       String?
+  seoDescription String?
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+  status         String   @default("published")
 
-  // La relation : un article peut avoir plusieurs commentaires
   commentaires Commentaire[]
 
-  @@map("articles") // Nom de la table dans MySQL
+  @@map("articles")
 }
 
 // Ce modèle représente un commentaire laissé par un visiteur

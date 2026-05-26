@@ -2,13 +2,14 @@
 
 import { useState, useEffect } from 'react'
 import { signIn, useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
-import { Eye, EyeOff, LogIn, AlertCircle, CheckCircle } from 'lucide-react'
+import { Eye, EyeOff, LogIn, AlertCircle } from 'lucide-react'
 
 export default function LoginPage() {
   const router = useRouter()
-  const { data: session, status } = useSession()
+  const searchParams = useSearchParams()
+  const { status } = useSession()
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -18,12 +19,12 @@ export default function LoginPage() {
     rememberMe: false
   })
 
-  // Rediriger si déjà connecté
   useEffect(() => {
     if (status === 'authenticated') {
-      router.push('/admin/blog/new')
+      const callbackUrl = searchParams.get('callbackUrl') || '/admin/blog/new'
+      router.push(callbackUrl)
     }
-  }, [status, router])
+  }, [status, router, searchParams])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target
@@ -49,10 +50,11 @@ export default function LoginPage() {
       if (result?.error) {
         setError('Email ou mot de passe incorrect')
       } else {
-        router.push('/admin/blog/new')
+        const callbackUrl = searchParams.get('callbackUrl') || '/admin/blog/new'
+        router.push(callbackUrl)
         router.refresh()
       }
-    } catch (error) {
+    } catch {
       setError('Une erreur est survenue')
     } finally {
       setIsLoading(false)
@@ -88,7 +90,7 @@ export default function LoginPage() {
         <div className="bg-white rounded-2xl shadow-xl p-8">
           <div className="text-center mb-8">
             <h2 className="text-2xl font-bold text-gray-900">Connexion</h2>
-            <p className="text-gray-600 mt-2">Accédez à votre espace d'administration</p>
+            <p className="text-gray-600 mt-2">Accédez à votre espace d&apos;administration</p>
           </div>
 
           {/* Message d'erreur */}
