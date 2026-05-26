@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
 
@@ -7,7 +8,7 @@ export default function AboutSection() {
       <div className="container-custom">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 font-playfair">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 font-playfair text-gray-800">
               À PROPOS DE IBABEAUTY CAMEROON
             </h2>
             <div className="space-y-4 text-gray-600">
@@ -21,13 +22,24 @@ export default function AboutSection() {
                 Nous sommes convaincus que le marketing des produits de beauté doit être aussi raffiné que les produits eux-mêmes. Grâce à un positionnement stratégique, une mise en œuvre experte et une attention constante aux détails, nous aidons les marques à assurer une croissance durable sur des marchés concurrentiels.
               </p>
             </div>
-            <Button variant="outline" className="mt-6 group">
-              LIRE PLUS
-              <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Button>
+            <a 
+            href="/blog" 
+            className="inline-flex items-center gap-2 bg-gray-900 text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors group mt-5"
+          >
+            Lire plus
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </a>
           </div>
           <div className="relative">
-            <div className="bg-gray-200 rounded-lg h-96 w-full"></div>
+            <div className="bg-gray-200 rounded-lg h-96 w-full">
+               <Image
+                          src="/Images/aboutSection.png"
+                          alt="Communauté unie"
+                          fill
+                          className="object-cover  brightness-90"
+                          priority
+                        />
+            </div>
             <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-black rounded-lg"></div>
           </div>
         </div>
@@ -35,3 +47,4 @@ export default function AboutSection() {
     </section>
   )
 }
+//<ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
