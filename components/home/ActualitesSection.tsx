@@ -3,12 +3,17 @@ import { Calendar, ArrowRight } from 'lucide-react'
 import { prisma } from '@/lib/prisma'
 
 async function getLatestArticles() {
-  const articles = await prisma.article.findMany({
-    where: { status: 'published' },
-    orderBy: { createdAt: 'desc' },
-    take: 3,
-  })
-  return articles
+  try {
+    const articles = await prisma.article.findMany({
+      where: { status: 'published' },
+      orderBy: { createdAt: 'desc' },
+      take: 3,
+    })
+    return articles
+  } catch (error) {
+    console.error('ActualitesSection: DB non disponible au build, fallback vide', error)
+    return []
+  }
 }
 
 export default async function ActualitesSection() {
