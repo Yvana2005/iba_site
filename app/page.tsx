@@ -6,6 +6,8 @@ import PartnerBrands from '@/components/home/PartnerBrands'
 import ActualitesSection from '@/components/home/ActualitesSection'
 import CTASection from '@/components/home/CTASection'
 
+export const dynamic = 'force-dynamic'
+
 export default function HomePage() {
   return (
     
